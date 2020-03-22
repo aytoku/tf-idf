@@ -68,4 +68,4 @@ def compute_tf_idf(tf, idf):
 tf_idf_A = compute_tf_idf(tf_A, idf)
 tf_idf_B = compute_tf_idf(tf_B, idf)
 tf_idf_C = compute_tf_idf(tf_C, idf)
-print()
+print(tf_idf_A)
