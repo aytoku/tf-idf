@@ -1,23 +1,17 @@
 import math
 
-arr = """
-Статическое свойство TextProperty является свойством зависимостей, представляя объект System.Windows.DependencyProperty.
-По соглашениям по именованию все свойства зависимостей представляют статические публичные поля (public static) с суффиксом Property.
-""".split("\n")[1:-1]
+n = int(input())
+arr = [input() for i in range(n)]
 
-A = arr[0].lower().split()
-B = arr[1].lower().split()
+letter = [arr[i].lower().split() for i in range(n)]
+word_set = {}
+for i in range(n):
+    word_set = set(word_set).union(set(letter[i]))
 
-word_set = set(A).union(set(B))
-
-word_dict_A = dict.fromkeys(word_set, 0)
-word_dict_B = dict.fromkeys(word_set, 0)
-
-for word in A:
-    word_dict_A[word] += 1
-
-for word in B:
-    word_dict_B[word] += 1
+word_dict_arr = [dict.fromkeys(word_set, 0) for i in range(n)]
+for i in range(n):
+    for word in letter[i]:
+        word_dict_arr[i][word] += 1
 
 
 def compute_tf(word_dict, l):
@@ -28,8 +22,9 @@ def compute_tf(word_dict, l):
     return tf
 
 
-tf_A = compute_tf(word_dict_A, A)
-tf_B = compute_tf(word_dict_B, B)
+tf_arr = [compute_tf(word_dict_arr[i], arr[i].lower().split()) for i in range(n)]
+
+# print(tf_arr[i] for i in range(n))
 
 
 def compute_idf(strings_list):
@@ -45,7 +40,7 @@ def compute_idf(strings_list):
     return idf
 
 
-idf = compute_idf([word_dict_A, word_dict_B])
+idf = compute_idf(word_dict_arr)
 
 
 def compute_tf_idf(tf, idf):
@@ -55,7 +50,6 @@ def compute_tf_idf(tf, idf):
     return tf_idf
 
 
-tf_idf_A = compute_tf_idf(tf_A, idf)
-tf_idf_B = compute_tf_idf(tf_B, idf)
-print(tf_idf_A)
-print(tf_idf_B)
+tf_idf_arr = [compute_tf_idf(tf_arr[i], idf) for i in range(n)]
+for i in range(n):
+    print(tf_idf_arr[i])
