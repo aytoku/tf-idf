@@ -24,8 +24,6 @@ def compute_tf(word_dict, l):
 
 tf_arr = [compute_tf(word_dict_arr[i], arr[i].lower().split()) for i in range(n)]
 
-# print(tf_arr[i] for i in range(n))
-
 
 def compute_idf(strings_list):
     n = len(strings_list)
